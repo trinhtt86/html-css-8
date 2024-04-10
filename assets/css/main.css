@@ -1946,7 +1946,7 @@ html.dark {
 
 .act-dropdown {
   position: absolute;
-  top: 60px;
+  top: 48px;
   right: -60px;
   width: min(500px, 100vw);
 }
