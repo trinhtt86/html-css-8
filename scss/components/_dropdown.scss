@@ -6,6 +6,10 @@
   left: 0;
   padding-top: 54px;
   display: none;
+  @include abstracts.screen(lg) {
+    position: initial;
+    padding-top: 0;
+  }
 
   &__inner {
     --inner-padding: 30px;
@@ -24,17 +28,36 @@
       translate: -50%;
       filter: var(--dropdown-arrow-color);
     }
+    @include abstracts.screen(lg) {
+      padding: 0 40px;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      &::before {
+        content: none;
+      }
+    }
+    @include abstracts.screen(sm) {
+      padding: 0 20px;
+    }
   }
 }
 
 .top-menu {
   --main-column-width: 292px;
+  --max-inner-height: calc(min(582px, 100vh - 154px) - var(--inner-padding) * 2);
   position: relative;
   &__main {
-    height: calc(min(582px, 100vh - 154px) - var(--inner-padding) * 2);
+    height: var(--max-inner-height);
     width: var(--main-column-width);
     border-right: 1px solid var(--top-menu-border-color);
     overflow-y: auto;
+
+    @include abstracts.screen(lg) {
+      width: 100%;
+      height: auto;
+      border-right: none;
+    }
   }
 }
 
@@ -44,13 +67,21 @@
   + .menu-column {
     margin-top: var(--inner-padding);
   }
+
+  @include abstracts.screen(lg) {
+    margin-top: 10px;
+  }
+
   &__icon {
     flex-shrink: 0;
     width: 36px;
     height: 36px;
     position: relative;
-    @include abstracts.breakpoint(xl) {
+    @include abstracts.screen(xl) {
       display: none;
+    }
+    @include abstracts.screen(lg) {
+      display: block;
     }
   }
 
@@ -60,6 +91,9 @@
 
   &__list {
     margin-top: 18px;
+    @include abstracts.screen(lg) {
+      margin-top: 0;
+    }
   }
 
   &__heading {
@@ -67,6 +101,10 @@
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 150%;
+
+    @include abstracts.screen(lg) {
+      margin-bottom: 26px;
+    }
   }
 
   &__item--active .sub-menu {
@@ -119,4 +157,24 @@
   grid-template-columns: repeat(3, 1fr);
   gap: var(--inner-padding);
   overflow-y: auto;
+
+  @include abstracts.screen(lg) {
+    position: initial;
+    grid-template-columns: 1fr;
+    padding-left: 0;
+  }
+
+  &--not-main {
+    position: initial;
+    inset: initial;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: var(--max-inner-height);
+    padding-left: 0;
+
+    @include abstracts.screen(lg) {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+  }
 }
